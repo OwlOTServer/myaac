@@ -19,7 +19,7 @@ $config['site_url']  = 'https://ot.owlcode.io';
 // database_overwrite = true força o uso das credenciais abaixo
 // em vez de ler do config.lua do canary.
 $config['database_overwrite']  = true;
-$config['database_host']       = 'TROQUE_PELO_IP_DO_CANARY';  // IP do servidor remoto
+$config['database_host']       = '192.168.15.8';  // IP local do Windows (Canary/MySQL via Docker)
 $config['database_port']       = 3306;
 $config['database_user']       = 'TROQUE_AQUI';
 $config['database_password']   = 'TROQUE_AQUI';
