@@ -9,6 +9,8 @@ RUN apt-get update && apt-get install -y \
     libfreetype6-dev \
     unzip \
     git \
+    nodejs \
+    npm \
     && docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp \
     && docker-php-ext-install pdo pdo_mysql xml dom zip gd \
     && rm -rf /var/lib/apt/lists/*

@@ -9,6 +9,12 @@ if [ ! -d "$WEBROOT/vendor" ]; then
     composer install --no-dev --optimize-autoloader --working-dir="$WEBROOT"
 fi
 
+# Install npm assets (tools/ext) if missing
+if [ ! -d "$WEBROOT/tools/ext/jquery" ]; then
+    echo "[myaac] Running npm install (tools/ext)..."
+    npm install --prefix "$WEBROOT" --omit=dev
+fi
+
 # Ensure writable directories exist
 mkdir -p "$WEBROOT/system/cache/twig"
 mkdir -p "$WEBROOT/system/logs"
