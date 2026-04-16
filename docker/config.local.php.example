@@ -6,7 +6,8 @@
 $config['installed'] = true;
 
 // ── Servidor ──────────────────────────────────────────────────────────────
-// Caminho dentro do container onde o canary está montado (não alterar)
+// Caminho onde o config.lua estático do Canary está montado no container.
+// O arquivo docker/canary/config.lua contém os dados públicos do servidor remoto.
 $config['server_path'] = '/srv/canary/';
 
 // ── Aparência ─────────────────────────────────────────────────────────────
@@ -18,10 +19,10 @@ $config['site_url']  = 'https://ot.owlcode.io';
 // database_overwrite = true força o uso das credenciais abaixo
 // em vez de ler do config.lua do canary.
 $config['database_overwrite']  = true;
-$config['database_host']       = 'database';   // nome do container MySQL
+$config['database_host']       = 'TROQUE_PELO_IP_DO_CANARY';  // IP do servidor remoto
 $config['database_port']       = 3306;
-$config['database_user']       = 'root';        // trocar em produção
-$config['database_password']   = 'root';        // trocar em produção
+$config['database_user']       = 'TROQUE_AQUI';
+$config['database_password']   = 'TROQUE_AQUI';
 $config['database_name']       = 'otservbr-global';
 $config['database_encryption'] = 'sha1';        // padrão do Canary
 

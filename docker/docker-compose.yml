@@ -16,10 +16,9 @@ services:
       DB_NAME: ${DB_NAME}
     volumes:
       - ..:/var/www/html
-      - ${CANARY_PATH}:/srv/canary:ro
+      - ./canary:/srv/canary:ro
     networks:
       - myaac-net
-      - canary-net
 
   web:
     image: nginx:alpine
@@ -38,9 +37,6 @@ services:
 networks:
   myaac-net:
     driver: bridge
-  canary-net:
-    external: true
-    name: otbr_canary-net
   proxy-net:
     external: true
     name: tunnel-test_default
