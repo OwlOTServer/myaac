@@ -1,0 +1,29 @@
+<?php
+// Gerado pelo instalador ou criado manualmente.
+// Copie para config.local.php na raiz do projeto e ajuste os valores.
+// NUNCA commite config.local.php — ele está no .gitignore.
+
+$config['installed'] = true;
+
+// ── Servidor ──────────────────────────────────────────────────────────────
+// Caminho dentro do container onde o canary está montado (não alterar)
+$config['server_path'] = '/srv/canary/';
+
+// ── Aparência ─────────────────────────────────────────────────────────────
+$config['template']  = 'tibiacom';
+$config['site_name'] = 'OwlCode OT';
+$config['site_url']  = 'https://ot.owlcode.io';
+
+// ── Banco de dados ────────────────────────────────────────────────────────
+// database_overwrite = true força o uso das credenciais abaixo
+// em vez de ler do config.lua do canary.
+$config['database_overwrite']  = true;
+$config['database_host']       = 'database';   // nome do container MySQL
+$config['database_port']       = 3306;
+$config['database_user']       = 'root';        // trocar em produção
+$config['database_password']   = 'root';        // trocar em produção
+$config['database_name']       = 'otservbr-global';
+$config['database_encryption'] = 'sha1';        // padrão do Canary
+
+// ── Ambiente ──────────────────────────────────────────────────────────────
+$config['env'] = 'prod';  // desabilita debug e erros visíveis

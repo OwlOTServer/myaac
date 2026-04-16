@@ -25,6 +25,7 @@ tmp
 
 config.local.php
 config2.local.php
+docker/.env.prod
 
 # all custom templates
 templates/*

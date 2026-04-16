@@ -16,7 +16,7 @@ services:
       DB_NAME: ${DB_NAME}
     volumes:
       - ..:/var/www/html
-      - /home/drosdek/development/owlot/canary:/srv/canary:ro
+      - ${CANARY_PATH}:/srv/canary:ro
     networks:
       - myaac-net
       - canary-net
@@ -33,6 +33,7 @@ services:
       - php
     networks:
       - myaac-net
+      - proxy-net
 
 networks:
   myaac-net:
@@ -40,3 +41,6 @@ networks:
   canary-net:
     external: true
     name: otbr_canary-net
+  proxy-net:
+    external: true
+    name: tunnel-test_default

@@ -1,0 +1,54 @@
+name: Deploy MyAAC
+
+on:
+  push:
+    branches: [main]
+
+concurrency:
+  group: deploy
+  cancel-in-progress: true
+
+jobs:
+  # ─── Qualidade de código (roda na nuvem do GitHub) ────────────────────────
+  lint:
+    name: PHP Lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: overtrue/phplint@8.2
+        with:
+          path: .
+          options: --exclude=*.log
+
+  # ─── Deploy (roda direto no servidor via self-hosted runner) ──────────────
+  deploy:
+    name: Deploy to owlcode.io
+    runs-on: [self-hosted, owlcode]
+    needs: lint
+    steps:
+      - name: Pull latest code
+        run: |
+          git -C /opt/servidor/myaac fetch origin main
+          git -C /opt/servidor/myaac reset --hard origin/main
+
+      - name: Rebuild PHP image (usa cache do Docker)
+        run: |
+          docker compose \
+            --project-directory /opt/servidor/myaac/docker \
+            --env-file /opt/servidor/myaac/docker/.env.prod \
+            build php
+
+      - name: Restart PHP container
+        run: |
+          docker compose \
+            --project-directory /opt/servidor/myaac/docker \
+            --env-file /opt/servidor/myaac/docker/.env.prod \
+            up -d --no-deps php
+
+      - name: Verify containers are healthy
+        run: |
+          docker compose \
+            --project-directory /opt/servidor/myaac/docker \
+            --env-file /opt/servidor/myaac/docker/.env.prod \
+            ps
