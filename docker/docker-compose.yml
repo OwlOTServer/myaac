@@ -39,4 +39,4 @@ networks:
     driver: bridge
   proxy-net:
     external: true
-    name: tunnel-test_default
+    name: tunnel-test_web
